@@ -21,7 +21,7 @@ public class FirstTest extends BaseTest {
     WebDriver driver;
     @Test
     public void firstTest() throws InterruptedException {
-        driver = new ChromeDriver();
+        driver = DriverFactory.getDriver();
         //   driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get("https://testeroprogramowania.github.io/selenium/wait2.html");
         driver.findElement(By.id("clickOnMe")).click();
@@ -47,7 +47,7 @@ public class FirstTest extends BaseTest {
         Assert.assertTrue(para.getText().startsWith("Dopiero"));
         Assert.assertFalse(para.getText().startsWith("pojawiłem"));
         Assert.assertEquals(para.getText(), "Dopiero się pojawiłem!"); //sprawdzamy, czy tekst sie zgadza
-        //Assert.assertEquals(para.getText(), "Dopiero", "Teksty są różne"); //druga wartość tekstowa -> wiadomość, że teksty są różne
+        Assert.assertEquals(para.getText(), "Dopiero", "Teksty są różne"); //druga wartość tekstowa -> wiadomość, że teksty są różne
         //Gdy jest błąd na asercji - test nie jest kontynuowany
         driver.quit();
     }

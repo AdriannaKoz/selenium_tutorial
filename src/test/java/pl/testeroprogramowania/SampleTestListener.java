@@ -1,10 +1,17 @@
 package pl.testeroprogramowania;
 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class SampleTestListener implements ITestListener {
     @Override
@@ -20,9 +27,20 @@ public class SampleTestListener implements ITestListener {
     @Override
     public void onTestFailure(ITestResult result) {
         System.out.println("I'm taking screenshot");
+        WebDriver driver = DriverFactory.getDriver();
         TakesScreenshot screenshot = (TakesScreenshot) driver;
+        File bug = screenshot.getScreenshotAs(OutputType.FILE);
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
+        String timestamp = now.format(formatter);
+        String fileNameAfter = "filedTest" + timestamp + ".png";
+        try {
+            FileUtils.copyFile(bug, new File("src/test/resources/"+fileNameAfter));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
+
 
     @Override
     public void onTestSkipped(ITestResult result) {
