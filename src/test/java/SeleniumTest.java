@@ -18,7 +18,7 @@ public class SeleniumTest {
         driver.get("https://www.google.com");
 
         //przejście do okna z plikami cookies - usunięte, bo google coś zmieniło
-       // driver.switchTo().frame(0);
+        driver.switchTo().frame(0);
         // znalezienie przycisku
         WebElement agreeButton = driver.findElement(By.xpath("//div[text()='Zaakceptuj wszystko']"));
         //kliknięcie na przycisk
