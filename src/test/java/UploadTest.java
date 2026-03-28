@@ -26,7 +26,7 @@ public class UploadTest {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
         String timestamp = now.format(formatter);
-        String fileNameAfter = "afterUpload" + timestamp + ".png";
+        String fileNameAfter = "afterUpload" + timestamp + "a.png";
         FileUtils.copyFile(after, new File("src/test/resources/"+fileNameAfter));
 
         Actions actions = new Actions(driver);
